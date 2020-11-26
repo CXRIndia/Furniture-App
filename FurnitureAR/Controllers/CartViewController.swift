@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 import RealmSwift
-
+import AppCenter
+import AppCenterCrashes
 
 class CartViewController: UIViewController {
 
@@ -34,6 +35,12 @@ class CartViewController: UIViewController {
     var lblBadge = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // For carsh report
+        AppCenter.start(withAppSecret: "63cc7968-3c2a-4121-a36e-4ad1e7114762", services:[
+          Crashes.self
+        ])
+                            
         setupUI()
     }
     

@@ -1,4 +1,12 @@
 PODS:
+  - AppCenter (4.0.0):
+    - AppCenter/Analytics (= 4.0.0)
+    - AppCenter/Crashes (= 4.0.0)
+  - AppCenter/Analytics (4.0.0):
+    - AppCenter/Core
+  - AppCenter/Core (4.0.0)
+  - AppCenter/Crashes (4.0.0):
+    - AppCenter/Core
   - Firebase/Analytics (7.1.0):
     - Firebase/Core
   - Firebase/Core (7.1.0):
@@ -72,6 +80,7 @@ PODS:
   - TPKeyboardAvoiding (1.3.3)
 
 DEPENDENCIES:
+  - AppCenter
   - Firebase/Analytics
   - ObjectMapper
   - RealmSwift
@@ -80,6 +89,7 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AppCenter
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
@@ -97,6 +107,7 @@ SPEC REPOS:
     - TPKeyboardAvoiding
 
 SPEC CHECKSUMS:
+  AppCenter: 51351e0121e40ba75e28ecb7de5c2e69d480df5e
   Firebase: 78e8dd2e39d653de6270432ad84fe8b59f7bf4e8
   FirebaseAnalytics: 7f165a56dea86ddd5b8ce02af3bee982c683405c
   FirebaseCore: 20046127eef0fcb8fa25df7fc12f7b97d4e48611
@@ -113,6 +124,6 @@ SPEC CHECKSUMS:
   SwiftyGif: e466e86c660d343357ab944a819a101c4127cb40
   TPKeyboardAvoiding: 6dd3fe3268b8f2627beb7ff3d82a3cacbdf66a36
 
-PODFILE CHECKSUM: df3ee8035f2b06cd7d986ff257dca0677bae3d62
+PODFILE CHECKSUM: 475aa8e947e9f30fdb167091130416ff2c0d5311
 
 COCOAPODS: 1.10.0

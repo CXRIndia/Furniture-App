@@ -13,6 +13,9 @@ import TPKeyboardAvoiding
 import ObjectMapper
 import RealmSwift
 import SwiftyGif
+import AppCenter
+import AppCenterCrashes
+
 // MARK: - State
 
 private enum State {
@@ -165,6 +168,10 @@ class MainViewController: UIViewController {
         
         setupARCoachingView()
         
+        // For carsh report
+        AppCenter.start(withAppSecret: "63cc7968-3c2a-4121-a36e-4ad1e7114762", services:[
+          Crashes.self
+        ])
         
         /*
         let gif = try! UIImage(gifName: "Scanning.gif")

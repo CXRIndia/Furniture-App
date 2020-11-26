@@ -10,6 +10,7 @@ target 'FurnitureAR' do
     pod 'ObjectMapper'
     pod 'SwiftyGif'
     pod 'RealmSwift'
+    pod 'AppCenter'
     pod 'Firebase/Analytics'
   target 'FurnitureARTests' do
     inherit! :search_paths
