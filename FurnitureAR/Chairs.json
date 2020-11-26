@@ -1,0 +1,123 @@
+[
+{
+"Name": "Cantilever Chair",
+"Image": "Cantilever Chair",
+"Price": "$400",
+"Id": "11",
+"DaeFileName": "M_008.dae",
+"RootNode": "M_008",
+"Product_Dimensions": "14H x 23W x 18D",
+"Color": "Grey",
+"Core_Materials": "Natural Fiber & Steel",
+"Style": "Modern"
+},
+{
+"Name": "Dining Room Chair",
+"Image": "Dining Room Chair",
+"Price": "$300",
+"Id": "12",
+"DaeFileName": "M_035.dae",
+"RootNode": "M_035",
+"Product_Dimensions": "38H x 21W x 25D",
+"Color": "Brown",
+"Core_Materials": "Wood & Steel",
+"Style": "Modern"
+},
+{
+"Name": "Organic Egg-Shaped Swivel Chair",
+"Image": "Organic Egg-Shaped Swivel Chair",
+"Price": "$500",
+"Id": "13",
+"DaeFileName": "M_047.dae",
+"RootNode": "M_047",
+"Product_Dimensions": "31.2H x 24.5W x 27.5D",
+"Color": "Red",
+"Core_Materials": "Plastic & Aluminum",
+"Style": "Modern"
+},
+{
+"Name": "Adjustable Office Chair with Flared Arms",
+"Image": "Adjustable Office Chair with Flared Arms",
+"Price": "$180",
+"Id": "14",
+"DaeFileName": "M_065.dae",
+"RootNode": "M_065",
+"Product_Dimensions": "31H x 22W x 23D",
+"Color": "Light Brown & White",
+"Core_Materials": "Wood, Natural Fabric & Steel",
+"Style": "Modern"
+},
+{
+"Name": "Modern Floating Arm/Back chair",
+"Image": "Modern Floating Arm Back chair",
+"Price": "$1,200",
+"Id": "15",
+"DaeFileName": "M_079.dae",
+"RootNode": "_polySurface19",
+"Product_Dimensions": "28H x 32W x 30D",
+"Color": "Grey",
+"Core_Materials": "Leather",
+"Style": "Modern"
+},
+{
+"Name": "Dining Chair",
+"Image": "Dining Chair",
+"Price": "$120",
+"Id": "16",
+"DaeFileName": "M_127.dae",
+"RootNode": "M_128",
+"Product_Dimensions": "29H x 20W x 16D",
+"Color": "Brown",
+"Core_Materials": "Wood & Steel",
+"Style": "Contemporary"
+},
+{
+"Name": "Guest Chair",
+"Image": "Guest Chair",
+"Price": "$200",
+"Id": "17",
+"DaeFileName": "M_143.dae",
+"RootNode": "M_144",
+"Product_Dimensions": "35H x 23W x 25D",
+"Color": "Brown & White",
+"Core_Materials": "Wood & Leather",
+"Style": "Contemporary"
+},
+{
+"Name": "Lounge Side Chair",
+"Image": "Lounge Side Chair",
+"Price": "$160",
+"Id": "18",
+"DaeFileName": "M_145.dae",
+"RootNode": "M_",
+"Product_Dimensions": "32H x 24W x 24D",
+"Color": "Brown & Light Blue",
+"Core_Materials": "Leather & Wood",
+"Style": "Modern"
+},
+{
+"Name": "Flared Armchair and Ottoman",
+"Image": "Flared Armchair and Ottoman",
+"Price": "$1,000",
+"Id": "19",
+"DaeFileName": "M_169.dae",
+"RootNode": "_M_169",
+"Product_Dimensions": "34H x 33W x 35D",
+"Color": "Light Blue",
+"Core_Materials": "Leather & Steel",
+"Style": "Modern"
+},
+{
+"Name": "Flared Armchair",
+"Image": "Flared Armchair",
+"Price": "$700",
+"Id": "20",
+"DaeFileName": "M_224.dae",
+"RootNode": "_M_224",
+"Product_Dimensions": "34H x 33W x 35D",
+"Color": "Grey",
+"Core_Materials": "Leather & Steel",
+"Style": "Contemporary"
+}
+]
+

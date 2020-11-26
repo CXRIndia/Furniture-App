@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Sans-Medium.ttf">
+            <string>Maax-Medium</string>
+        </array>
+        <array key="Sans-Regular.ttf">
+            <string>Maax</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FurnitureDetailView" customModule="FurnitureAR" customModuleProvider="target">
+            <connections>
+                <outlet property="blackDotButton" destination="p1O-lZ-rbB" id="Sf8-Mw-4Bk"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="w4S-6K-hDP"/>
+                <outlet property="furnitureImage" destination="ION-iH-3OI" id="rIE-2M-6pR"/>
+                <outlet property="nameLabel" destination="ixD-gl-u95" id="eQU-gh-9Km"/>
+                <outlet property="priceLabel" destination="ccX-9C-CPc" id="FQH-XE-oQl"/>
+                <outlet property="yellowDotButton" destination="VXU-b7-kCP" id="moK-an-gOB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uw1-eX-Ors">
+                    <rect key="frame" x="40" y="57" width="23" height="23"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="23" id="DkB-wB-lPv"/>
+                        <constraint firstAttribute="width" constant="23" id="PqS-io-VIM"/>
+                    </constraints>
+                    <state key="normal" image="BackButton"/>
+                    <connections>
+                        <action selector="backButtonPressed:" destination="-1" eventType="touchUpInside" id="Gtz-0L-jFd"/>
+                    </connections>
+                </button>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chair" translatesAutoresizingMaskIntoConstraints="NO" id="ION-iH-3OI">
+                    <rect key="frame" x="91" y="119.5" width="232" height="200"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="200" id="NVf-y1-OWu"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ronninge Chair" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ixD-gl-u95">
+                    <rect key="frame" x="77" y="56.5" width="258" height="24"/>
+                    <fontDescription key="fontDescription" name="Maax-Medium" family="Maax" pointSize="24"/>
+                    <color key="textColor" red="0.45882352941176469" green="0.45882352941176469" blue="0.45882352941176469" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ 17.99" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ccX-9C-CPc">
+                    <rect key="frame" x="77" y="83.5" width="62" height="18"/>
+                    <fontDescription key="fontDescription" name="Maax" family="Maax" pointSize="18"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p1O-lZ-rbB">
+                    <rect key="frame" x="343" y="57" width="23" height="23"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="23" id="4BY-dw-hvd"/>
+                        <constraint firstAttribute="width" constant="23" id="TEK-kC-AHQ"/>
+                    </constraints>
+                    <connections>
+                        <action selector="blackDotButtonClicked:" destination="-1" eventType="touchUpInside" id="TDC-Zw-ZBA"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VXU-b7-kCP">
+                    <rect key="frame" x="370" y="57" width="23" height="23"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="23" id="aGj-9u-c3h"/>
+                        <constraint firstAttribute="height" constant="23" id="gAc-A5-OtX"/>
+                    </constraints>
+                    <connections>
+                        <action selector="yellowDotButtonClicked:" destination="-1" eventType="touchUpInside" id="8ve-pl-9Mz"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="ION-iH-3OI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="1jQ-yG-n68"/>
+                <constraint firstItem="Uw1-eX-Ors" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="40" id="5FL-XG-rwY"/>
+                <constraint firstItem="VXU-b7-kCP" firstAttribute="leading" secondItem="p1O-lZ-rbB" secondAttribute="trailing" constant="4" id="EXb-9f-xiw"/>
+                <constraint firstItem="p1O-lZ-rbB" firstAttribute="leading" secondItem="ixD-gl-u95" secondAttribute="trailing" constant="8" id="FD7-Ka-1lg"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="VXU-b7-kCP" secondAttribute="trailing" constant="21" id="O2A-u0-ePO"/>
+                <constraint firstItem="VXU-b7-kCP" firstAttribute="centerY" secondItem="ixD-gl-u95" secondAttribute="centerY" id="T93-nS-Nzy"/>
+                <constraint firstItem="ccX-9C-CPc" firstAttribute="top" secondItem="ixD-gl-u95" secondAttribute="bottom" constant="3" id="ZmQ-3g-Ytx"/>
+                <constraint firstItem="ixD-gl-u95" firstAttribute="centerY" secondItem="Uw1-eX-Ors" secondAttribute="centerY" id="dHH-Rc-ICz"/>
+                <constraint firstItem="ION-iH-3OI" firstAttribute="leading" secondItem="Uw1-eX-Ors" secondAttribute="trailing" constant="28" id="hXX-ox-5Ix"/>
+                <constraint firstItem="ixD-gl-u95" firstAttribute="leading" secondItem="Uw1-eX-Ors" secondAttribute="trailing" constant="14" id="jI9-09-10l"/>
+                <constraint firstItem="ION-iH-3OI" firstAttribute="top" secondItem="ccX-9C-CPc" secondAttribute="bottom" constant="18" id="lg3-ZE-ylL"/>
+                <constraint firstItem="ccX-9C-CPc" firstAttribute="leading" secondItem="ixD-gl-u95" secondAttribute="leading" id="nwS-ep-oeZ"/>
+                <constraint firstItem="Uw1-eX-Ors" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="13" id="qJx-29-W8N"/>
+                <constraint firstItem="p1O-lZ-rbB" firstAttribute="centerY" secondItem="ixD-gl-u95" secondAttribute="centerY" id="sez-4t-PKf"/>
+            </constraints>
+            <point key="canvasLocation" x="136.875" y="107.74647887323944"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="BackButton" width="32" height="32"/>
+        <image name="chair" width="194" height="183"/>
+    </resources>
+</document>

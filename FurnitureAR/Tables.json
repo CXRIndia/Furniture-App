@@ -1,0 +1,76 @@
+[
+{
+"Name": "Round Bistro Table",
+"Image": "Round Bistro Table",
+"Price": "$500",
+"Id": "21",
+"Product_Dimensions": "42H x 36W x 36D",
+"DaeFileName": "M_058.dae",
+"RootNode": "_M_058",
+"Color": "Birch & Grey/Black",
+"Core_Materials": "Wood & Steel",
+"Style": "Modern"
+},
+{
+"Name": "Round Bar Table",
+"Image": "Round Bar Table",
+"Price": "$300",
+"Id": "22",
+"DaeFileName": "M_177.dae",
+"RootNode": "M_177",
+"Product_Dimensions": "42H x 22W x 22D",
+"Color": "Chrome",
+"Core_Materials": "Aluminum",
+"Style": "Industrial"
+},
+{
+"Name": "Wooden Table",
+"Image": "Wooden Table",
+"Price": "$1,000",
+"Id": "24",
+"DaeFileName": "M_232.dae",
+"RootNode": "M_232",
+"Product_Dimensions": "30H x 72W x 36D",
+"Color": "Brown",
+"Core_Materials": "Wood",
+"Style": "Modern"
+},
+{
+"Name": "Boat Shaped Table",
+"Image": "Boat Shaped Table",
+"Price": "$2,000",
+"Id": "26",
+"DaeFileName": "M_234.dae",
+"RootNode": "M_234",
+"Product_Dimensions": "30H x 96W x 42D",
+"Color": "Brown & Dark Grey",
+"Core_Materials": "Wood & Steel",
+"Style": "Contemporary"
+},
+{
+"Name": "Fancy Rectangular Meeting Room Table",
+"Image": "Fancy Rectangular Meeting Room Table",
+"Price": "$15,000",
+"Id": "29",
+"DaeFileName": "M_244.dae",
+"RootNode": "M_244",
+"Product_Dimensions": "30H x 180W x 48D",
+"Color": "Brown, Purple & Grey",
+"Core_Materials": "Wood, leather & Steel",
+"Style": "Classic Modern"
+},
+{
+"Name": "Large Boat Shaped Conference Table",
+"Image": "Large Boat Shaped Conference Table",
+"Price": "$8,000",
+"Id": "30",
+"DaeFileName": "M_245.dae",
+"RootNode": "M_245",
+"Product_Dimensions": "30H x 240W x 54D",
+"Color": "Light Birch & Blue",
+"Core_Materials": "Wood & Leather",
+"Style": "Contemporary"
+}
+]
+
+

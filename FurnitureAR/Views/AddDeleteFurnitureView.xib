@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Sans-Regular.ttf">
+            <string>Maax</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AddDeleteFurnitureView" customModule="FurnitureAR" customModuleProvider="target">
+            <connections>
+                <outlet property="addToWishlistButton" destination="KqW-8s-6as" id="LPY-mM-9Xn"/>
+                <outlet property="backgroundViewForShare" destination="YdH-y4-GUA" id="Tyx-IU-JCv"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="M0t-XH-4d6"/>
+                <outlet property="deleteButton" destination="ejz-Bk-sIg" id="zid-4U-r3o"/>
+                <outlet property="wishListLabel" destination="sgW-Q3-U0a" id="lOL-LM-S9c"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delete" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehf-eI-xQ3">
+                    <rect key="frame" x="53" y="62" width="32.5" height="11"/>
+                    <fontDescription key="fontDescription" name="Maax" family="Maax" pointSize="11"/>
+                    <color key="textColor" red="0.38039215686274508" green="0.38039215686274508" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wishlist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgW-Q3-U0a">
+                    <rect key="frame" x="326" y="62" width="38.5" height="11"/>
+                    <fontDescription key="fontDescription" name="Maax" family="Maax" pointSize="11"/>
+                    <color key="textColor" red="0.38039215686274508" green="0.38039215686274508" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="775-0X-xFX">
+                    <rect key="frame" x="0.0" y="-20" width="414" height="120"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ejz-Bk-sIg">
+                            <rect key="frame" x="0.0" y="47" width="138" height="26"/>
+                            <state key="normal" image="trash"/>
+                            <connections>
+                                <action selector="deleteButtonClicked:" destination="-1" eventType="touchUpInside" id="seM-LD-r9w"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sA7-ha-cEh">
+                            <rect key="frame" x="138" y="32" width="138" height="56"/>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
+                            <state key="normal" image="Shutter"/>
+                            <connections>
+                                <action selector="shutterButtonClicked:" destination="-1" eventType="touchUpInside" id="2nR-Mt-ez0"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KqW-8s-6as">
+                            <rect key="frame" x="276" y="47" width="138" height="26"/>
+                            <state key="normal" image="heart"/>
+                            <connections>
+                                <action selector="addToWishListButtonClicked:" destination="-1" eventType="touchUpInside" id="H14-ID-EO6"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                </stackView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdH-y4-GUA">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="100"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="dx6-4N-j49">
+                            <rect key="frame" x="32" y="10" width="350" height="80"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kMy-mH-QIC">
+                                    <rect key="frame" x="0.0" y="0.0" width="350" height="40"/>
+                                    <fontDescription key="fontDescription" name="Maax" family="Maax" pointSize="18"/>
+                                    <state key="normal" title="Save on your phone">
+                                        <color key="titleColor" red="0.38039215686274508" green="0.38039215686274508" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="saveButtonClicked:" destination="-1" eventType="touchUpInside" id="Aqa-wt-Lok"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cxs-SL-kol">
+                                    <rect key="frame" x="0.0" y="40" width="350" height="40"/>
+                                    <fontDescription key="fontDescription" name="Maax" family="Maax" pointSize="18"/>
+                                    <state key="normal" title="Save and share">
+                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="saveAndShareButtonClicked:" destination="-1" eventType="touchUpInside" id="HIN-nF-WMO"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="cxs-SL-kol" secondAttribute="trailing" id="Yq6-9a-CtD"/>
+                                <constraint firstItem="kMy-mH-QIC" firstAttribute="leading" secondItem="dx6-4N-j49" secondAttribute="leading" id="eUV-aL-0xd"/>
+                                <constraint firstAttribute="trailing" secondItem="kMy-mH-QIC" secondAttribute="trailing" id="exM-EY-Baw"/>
+                                <constraint firstItem="cxs-SL-kol" firstAttribute="leading" secondItem="dx6-4N-j49" secondAttribute="leading" id="gSa-Gm-a9U"/>
+                            </constraints>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZp-B8-F3T">
+                            <rect key="frame" x="20" y="49.5" width="374" height="1"/>
+                            <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="tJL-Gn-yeP"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="dx6-4N-j49" firstAttribute="top" secondItem="YdH-y4-GUA" secondAttribute="top" constant="10" id="4S6-ZH-WtG"/>
+                        <constraint firstAttribute="trailing" secondItem="vZp-B8-F3T" secondAttribute="trailing" constant="20" id="HFF-qh-D2h"/>
+                        <constraint firstAttribute="bottom" secondItem="dx6-4N-j49" secondAttribute="bottom" constant="10" id="cxN-69-Xhn"/>
+                        <constraint firstAttribute="trailing" secondItem="dx6-4N-j49" secondAttribute="trailing" constant="32" id="du6-nO-H8H"/>
+                        <constraint firstItem="vZp-B8-F3T" firstAttribute="leading" secondItem="YdH-y4-GUA" secondAttribute="leading" constant="20" id="htS-U6-Dta"/>
+                        <constraint firstItem="dx6-4N-j49" firstAttribute="leading" secondItem="YdH-y4-GUA" secondAttribute="leading" constant="32" id="oXk-VR-4EP"/>
+                        <constraint firstItem="vZp-B8-F3T" firstAttribute="centerY" secondItem="YdH-y4-GUA" secondAttribute="centerY" id="tTd-HG-BhJ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="775-0X-xFX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="9sK-dO-9wc"/>
+                <constraint firstAttribute="bottom" secondItem="775-0X-xFX" secondAttribute="bottom" id="AnW-q1-7J0"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="775-0X-xFX" secondAttribute="trailing" id="EZz-ME-InD"/>
+                <constraint firstItem="YdH-y4-GUA" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Hod-Vi-sav"/>
+                <constraint firstItem="ehf-eI-xQ3" firstAttribute="centerY" secondItem="sgW-Q3-U0a" secondAttribute="centerY" id="KCt-eT-BJ0"/>
+                <constraint firstItem="ehf-eI-xQ3" firstAttribute="centerX" secondItem="ejz-Bk-sIg" secondAttribute="centerX" id="KOS-9p-sll"/>
+                <constraint firstItem="YdH-y4-GUA" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="Nwg-gd-QD5"/>
+                <constraint firstItem="YdH-y4-GUA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="PcG-KL-0kM"/>
+                <constraint firstItem="YdH-y4-GUA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="aZf-Yo-WHh"/>
+                <constraint firstItem="775-0X-xFX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-20" id="axU-tx-nct"/>
+                <constraint firstItem="sgW-Q3-U0a" firstAttribute="centerX" secondItem="KqW-8s-6as" secondAttribute="centerX" id="bU7-xX-Al1"/>
+                <constraint firstItem="sgW-Q3-U0a" firstAttribute="top" secondItem="KqW-8s-6as" secondAttribute="bottom" constant="9" id="kJU-1j-D0D"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="137.68115942028987" y="91.741071428571431"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Shutter" width="56" height="56"/>
+        <image name="heart" width="31" height="26"/>
+        <image name="trash" width="23" height="26"/>
+    </resources>
+</document>

@@ -1,0 +1,50 @@
+[
+{
+"Name": "Floating Back Loveseat",
+"Image": "Floating Back Loveseat",
+"Price": "$1,800",
+"Id": "2",
+"DaeFileName": "M_080.dae",
+"RootNode": "M_80",
+"Product_Dimensions": "37H x 60W x 32D",
+"Color": "Dark Grey",
+"Core_Materials": "Natural Fiber & Steel",
+"Style": "Modern"
+},
+{
+"Name": "Divan Sofa",
+"Image": "Divan Sofa",
+"Price": "$2,800",
+"Id": "5",
+"Product_Dimensions": "20H x 45W x 25D",
+"DaeFileName": "M_083.dae",
+"RootNode": "_M_083",
+"Color": "Grey",
+"Core_Materials": "Steel & Leather",
+"Style": "Modern"
+},
+{
+"Name": "Flared Arm Loveseat",
+"Image": "Flared Arm Loveseat",
+"Price": "$500",
+"Id": "9",
+"DaeFileName": "M_222.dae",
+"RootNode": "M_222",
+"Product_Dimensions": "32H x 50W x 35D",
+"Color": "White",
+"Core_Materials": "Leather",
+"Style": "Modern"
+},
+{
+"Name": "Flared Arm sofa",
+"Image": "Flared Arm sofa",
+"Price": "$800",
+"Id": "10",
+"DaeFileName": "M_223.dae",
+"RootNode": "M_223",
+"Product_Dimensions": "32H x 72W x 28D",
+"Color": "White",
+"Core_Materials": "Leather",
+"Style": "Modern"
+}
+]
