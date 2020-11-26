@@ -337,6 +337,8 @@
 		47EFB9FF23F68FDD00BE3AEE /* extensionUIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47EFB9FE23F68FDD00BE3AEE /* extensionUIColor.swift */; };
 		47F2A67A240D5189006D1CCF /* M_222.dae in Resources */ = {isa = PBXBuildFile; fileRef = 47F2A679240D5189006D1CCF /* M_222.dae */; };
 		47F32CFB255562BC00B20691 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F32CFA255562BC00B20691 /* CartTableViewCell.swift */; };
+		E7F64C96256FF5820062544D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7F64C95256FF5820062544D /* GoogleService-Info.plist */; };
+		E7F64C97256FF5820062544D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7F64C95256FF5820062544D /* GoogleService-Info.plist */; };
 		ED8B9543E587F4AA35264AAC /* Pods_FurnitureARTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E56F7763B8F821F9DB256E4 /* Pods_FurnitureARTests.framework */; };
 		EF02EE952B204E5B151DA293 /* Pods_FurnitureAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB585BE19EB0FAB45A27A9BE /* Pods_FurnitureAR.framework */; };
 /* End PBXBuildFile section */
@@ -670,7 +672,7 @@
 		47E2846D23FBEA6100212651 /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
 		47E2847423FC1C7500212651 /* WishListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WishListTableViewCell.swift; sourceTree = "<group>"; };
 		47E2847623FC1F2500212651 /* UIFont+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extension.swift"; sourceTree = "<group>"; };
-		47EFB9B323F6835F00BE3AEE /* FurnitureAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FurnitureAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		47EFB9B323F6835F00BE3AEE /* Eastern Maple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Eastern Maple.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		47EFB9B623F6835F00BE3AEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		47EFB9B823F6835F00BE3AEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		47EFB9BA23F6835F00BE3AEE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -699,6 +701,8 @@
 		47F32CFA255562BC00B20691 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
 		6B82ED01F42DED4E8A49D824 /* Pods_FurnitureAR_FurnitureARUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FurnitureAR_FurnitureARUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A462D85CC79068B0415EA66A /* Pods-FurnitureAR-FurnitureARUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FurnitureAR-FurnitureARUITests.debug.xcconfig"; path = "Target Support Files/Pods-FurnitureAR-FurnitureARUITests/Pods-FurnitureAR-FurnitureARUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E7F64C8E256FF30C0062544D /* Eastern Maple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Eastern Maple.entitlements"; sourceTree = "<group>"; };
+		E7F64C95256FF5820062544D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EB585BE19EB0FAB45A27A9BE /* Pods_FurnitureAR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FurnitureAR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F8D8EB0F3665584368E5F2F1 /* Pods-FurnitureAR-FurnitureARUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FurnitureAR-FurnitureARUITests.release.xcconfig"; path = "Target Support Files/Pods-FurnitureAR-FurnitureARUITests/Pods-FurnitureAR-FurnitureARUITests.release.xcconfig"; sourceTree = "<group>"; };
 		FA3380F9AFC71D8BA18AE6B6 /* Pods-FurnitureAR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FurnitureAR.debug.xcconfig"; path = "Target Support Files/Pods-FurnitureAR/Pods-FurnitureAR.debug.xcconfig"; sourceTree = "<group>"; };
@@ -926,7 +930,7 @@
 		47EFB9B423F6835F00BE3AEE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				47EFB9B323F6835F00BE3AEE /* FurnitureAR.app */,
+				47EFB9B323F6835F00BE3AEE /* Eastern Maple.app */,
 				47EFB9C923F6836300BE3AEE /* FurnitureARTests.xctest */,
 				47EFB9D423F6836300BE3AEE /* FurnitureARUITests.xctest */,
 			);
@@ -936,6 +940,7 @@
 		47EFB9B523F6835F00BE3AEE /* FurnitureAR */ = {
 			isa = PBXGroup;
 			children = (
+				E7F64C8E256FF30C0062544D /* Eastern Maple.entitlements */,
 				4755AE19255BFE0A0077C19E /* FurnitureApp_Scanner */,
 				47A4BCAA25512822009B15AF /* Controllers */,
 				47A4BCA9255127FE009B15AF /* Cell */,
@@ -957,6 +962,7 @@
 				47EFB9BF23F6836200BE3AEE /* Assets.xcassets */,
 				47EFB9C123F6836200BE3AEE /* LaunchScreen.storyboard */,
 				47EFB9C423F6836200BE3AEE /* Info.plist */,
+				E7F64C95256FF5820062544D /* GoogleService-Info.plist */,
 			);
 			path = FurnitureAR;
 			sourceTree = "<group>";
@@ -1222,7 +1228,7 @@
 			);
 			name = FurnitureAR;
 			productName = FurnitureAR;
-			productReference = 47EFB9B323F6835F00BE3AEE /* FurnitureAR.app */;
+			productReference = 47EFB9B323F6835F00BE3AEE /* Eastern Maple.app */;
 			productType = "com.apple.product-type.application";
 		};
 		47EFB9C823F6836300BE3AEE /* FurnitureARTests */ = {
@@ -1359,6 +1365,7 @@
 				4755AE9E255BFE620077C19E /* Scanner78.png in Resources */,
 				4755AEA3255BFE620077C19E /* Scanner8.png in Resources */,
 				474B6D0F240F98FB00CFFC28 /* M_236_Normal_DirectX.png in Resources */,
+				E7F64C96256FF5820062544D /* GoogleService-Info.plist in Resources */,
 				474B6CE8240F966000CFFC28 /* M_232_Roughness.png in Resources */,
 				474BEC2B23FFB88200B73CE4 /* AddDeleteFurnitureView.xib in Resources */,
 				474B6D00240F97B700CFFC28 /* M_234_Mixed_AO.jpg in Resources */,
@@ -1609,6 +1616,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7F64C97256FF5820062544D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1939,6 +1947,7 @@
 			baseConfigurationReference = FA3380F9AFC71D8BA18AE6B6 /* Pods-FurnitureAR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "FurnitureAR/Eastern Maple.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = GFRTAC4LR4;
@@ -1948,8 +1957,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cemtrexlabs.FurnitureAR;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cemtrexlabs.EasternMaple;
+				PRODUCT_NAME = "Eastern Maple";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1960,6 +1969,7 @@
 			baseConfigurationReference = 2E0BD6AC65C3A1C3F4FAD16A /* Pods-FurnitureAR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "FurnitureAR/Eastern Maple.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = GFRTAC4LR4;
@@ -1969,8 +1979,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Cemtrexlabs.FurnitureAR;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Cemtrexlabs.EasternMaple;
+				PRODUCT_NAME = "Eastern Maple";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
