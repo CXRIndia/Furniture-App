@@ -9,7 +9,7 @@ target 'FurnitureAR' do
     pod 'TPKeyboardAvoiding'
     pod 'ObjectMapper'
     pod 'SwiftyGif'
-
+    pod 'RealmSwift'
   target 'FurnitureARTests' do
     inherit! :search_paths
     # Pods for testing
