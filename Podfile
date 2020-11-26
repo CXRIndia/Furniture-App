@@ -8,7 +8,6 @@ target 'FurnitureAR' do
   # Pods for FurnitureAR
     pod 'TPKeyboardAvoiding'
     pod 'ObjectMapper'
-    pod 'RealmSwift'
     pod 'SwiftyGif'
 
   target 'FurnitureARTests' do
