@@ -38,7 +38,7 @@ class AddDeleteFurnitureView: UIView {
     
     func configureView(savedItem: SavedItem) {
         let realm = try! Realm()
-        if let item = realm.objects(SavedItem.self).filter("id == %@",savedItem.id!).first {
+        if let _ = realm.objects(SavedItem.self).filter("id == %@",savedItem.id!).first {
             wishListLabel.text = "Wishlisted"
             addToWishlistButton.setImage(UIImage(named: "heartSelected"), for: .normal)
         } else {

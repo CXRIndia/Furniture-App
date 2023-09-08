@@ -8,6 +8,11 @@
 
 import Foundation
 import SceneKit
+
+
+fileprivate let highlightMaskValue: Int = 2
+fileprivate let normalMaskValue: Int = 1
+
 extension SCNNode {
     convenience init(named name: String) {
         self.init()
@@ -23,9 +28,18 @@ extension SCNNode {
 
 extension SCNNode {
     func setHighlighted( _ highlighted : Bool = true, _ highlightedBitMask : Int = 2 ) {
+       
+        if highlighted {
+        self.setCategoryBitMaskForAllHierarchy(highlightMaskValue)
+        } else {
+        self.setCategoryBitMaskForAllHierarchy(normalMaskValue)
+        }
+        
+        /*
         categoryBitMask = highlightedBitMask
         for child in self.childNodes {
             child.setHighlighted()
         }
+        */
     }
 }

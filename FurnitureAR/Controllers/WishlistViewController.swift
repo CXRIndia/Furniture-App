@@ -8,8 +8,6 @@
 
 import UIKit
 import RealmSwift
-import AppCenter
-import AppCenterCrashes
 
 protocol WishlistViewControllerDelegate: class {
     func diddismissVC(index:Int)
@@ -42,11 +40,6 @@ class WishlistViewController: UIViewController {
     var lblBadge = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // For carsh report
-        AppCenter.start(withAppSecret: "63cc7968-3c2a-4121-a36e-4ad1e7114762", services:[
-          Crashes.self
-        ])
-                            
         setupUI()
     }
     
@@ -68,7 +61,6 @@ class WishlistViewController: UIViewController {
             emptyDataView.isHidden = false
         }
         setupButtonsImageandText()
-        
     }
     
     @IBAction func backButtonClicked(_ sender: Any) {
@@ -212,7 +204,13 @@ extension WishlistViewController: UICollectionViewDataSource, UICollectionViewDe
         self.present(wishListDetailVC, animated: true, completion: nil)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (self.collectionView.frame.width/2)-5, height: 190)
+        /*
+        if Display.typeIsLike == .iphone5 {
+            return CGSize(width: (self.collectionView.frame.width/2)-5, height: 190)
+        }
         return CGSize(width: (self.collectionView.frame.width/2)-5, height: 177)
+        */
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -33,6 +33,7 @@ class ThreeLableHoriantalView: UIView {
         paragraphStyle.alignment = .center;
         // *** set LineSpacing property in points ***
         paragraphStyle.lineSpacing = 3 // Whatever line spacing you want in points
+        let blankString = NSMutableAttributedString(string: "\r", attributes:attrs1)
         
         let productDimensionDescriptionString = NSMutableAttributedString(string:"Product Dimension" + "\r", attributes:attrs1)
         let productDimensionString = NSMutableAttributedString(string: productDimension , attributes:attrs2)
@@ -41,12 +42,18 @@ class ThreeLableHoriantalView: UIView {
         self.productDimensionLabel.attributedText = productDimensionDescriptionString
 
         let productMaterialString = NSMutableAttributedString(string:"Product Material" + "\r", attributes:attrs1)
+        if Display.typeIsLike == .iphone5 {
+            productMaterialString.append(blankString)
+        }
         let productMaterialDescriptionString = NSMutableAttributedString(string: productMaterial , attributes:attrs2)
         productMaterialString.append(productMaterialDescriptionString)
         productMaterialString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, productMaterialString.length))
         self.productMaterialLabel.attributedText = productMaterialString
 
         let warrantyString = NSMutableAttributedString(string:"Warranty" + "\r", attributes:attrs1)
+        if Display.typeIsLike == .iphone5 {
+            warrantyString.append(blankString)
+        }
         let warrantyDescriptionString = NSMutableAttributedString(string:warranty, attributes:attrs2)
         warrantyString.append(warrantyDescriptionString)
         warrantyString.addAttribute(NSAttributedString.Key.paragraphStyle, value:paragraphStyle, range:NSMakeRange(0, warrantyString.length))

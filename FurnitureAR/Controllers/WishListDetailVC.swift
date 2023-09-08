@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 import RealmSwift
-import AppCenter
-import AppCenterCrashes
+
 
 class WishListDetailVC: UIViewController {
     
@@ -28,12 +27,6 @@ class WishListDetailVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // For carsh report
-        AppCenter.start(withAppSecret: "63cc7968-3c2a-4121-a36e-4ad1e7114762", services:[
-          Crashes.self
-        ])
-                            
         setupUI()
     }
     
@@ -170,7 +163,15 @@ extension WishListDetailVC:WishListDetailViewViewDelegate {
     }
     
     func contactUSButtonClicked() {
-        
+        guard let url = URL(string: "https://cemtrexlabs.com/contact") else {
+          return //be safe
+        }
+
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UIApplication.shared.openURL(url)
+        }
     }
     
     func backToWishListButtonClicked() {
