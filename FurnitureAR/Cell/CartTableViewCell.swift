@@ -55,10 +55,15 @@ class CartTableViewCell: UITableViewCell {
         if let image = savedItem.image {
             furnitureImageView.image = UIImage(named: image)
         }
-        if let price = savedItem.price {
-            furniturePriceLabel.text = price
-        }
         let itemQuantity = savedItem.itemCount
+        if let price = savedItem.price {
+            let priceWithoutComma = price.replacingOccurrences(of: ",", with: "")
+            let priceWithoutCurrencyCode = priceWithoutComma.replacingOccurrences(of: "$", with: "")
+            if let priceInInt = Int(priceWithoutCurrencyCode) {
+            furniturePriceLabel.text = "$ \(priceInInt*itemQuantity)"
+            }
+        }
+        
         itemQuantityLabel.text = "\(itemQuantity)"
         
     }
@@ -230,7 +235,7 @@ class CartTableViewCell: UITableViewCell {
         furniturePriceLabel.minimumScaleFactor = 0.2
         furniturePriceLabel.numberOfLines = 1
         furniturePriceLabel.font = .medium(17)
-        furnitureTitleLabel.textColor = .black
+        furniturePriceLabel.textColor = .black
     }
     
 }

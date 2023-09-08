@@ -15,7 +15,7 @@
 			<key>metalFragmentShader</key>
 			<string>mask_fragment</string>
 			<key>includeCategoryMask</key>
-			<integer>2</integer>
+			<string>2</string>
 			<key>inputs</key>
 			<dict>
 				<key>colorSampler</key>
@@ -44,8 +44,6 @@
 				<string>COLOR</string>
 				<key>maskSampler</key>
 				<string>MASK</string>
-				<key>glowColor</key>
-				<string>glowColorSymbol</string>
 			</dict>
 			<key>outputs</key>
 			<dict>
@@ -123,17 +121,10 @@
 		<string>pass_draw_masks</string>
 		<string>pass_blur_h</string>
 		<string>pass_blur_v</string>
-		<string>pass_blur_h</string>
-		<string>pass_blur_v</string>
 		<string>pass_combine</string>
 	</array>
 	<key>symbols</key>
 	<dict>
-		<key>glowColorSymbol</key>
-		<dict>
-			<key>type</key>
-			<string>vec3</string>
-		</dict>
 		<key>vertexSymbol</key>
 		<dict>
 			<key>semantic</key>

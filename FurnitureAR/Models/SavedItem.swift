@@ -1,10 +1,3 @@
-//
-//  SavedItem.swift
-//  FurnitureAR
-//
-//  Created by akshay patil on 20/02/20.
-//  Copyright © 2020 akshay patil. All rights reserved.
-//
 
 import Foundation
 import ObjectMapper
@@ -26,7 +19,7 @@ class SavedItem: Object,Mappable {
     @objc dynamic var itemInCart: Bool = false
     
 
-    required convenience init(map: Map) {
+    required convenience init(map: ObjectMapper.Map) {
         self.init()
     }
 
@@ -34,7 +27,7 @@ class SavedItem: Object,Mappable {
         return "id"
     }
 
-    func mapping(map: Map) {
+    func mapping(map: ObjectMapper.Map) {
         id                  <- map["Id"]
         name                <- map["Name"]
         price               <- map["Price"]
@@ -49,5 +42,6 @@ class SavedItem: Object,Mappable {
         itemInCart          <- map["ItemInCart"]
     }
 }
+
 
 

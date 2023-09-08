@@ -13,9 +13,6 @@ import TPKeyboardAvoiding
 import ObjectMapper
 import RealmSwift
 import SwiftyGif
-import AppCenter
-import AppCenterCrashes
-
 // MARK: - State
 
 private enum State {
@@ -85,6 +82,21 @@ class MainViewController: UIViewController {
     var snapshot: UIImage?
     var itemToViewArray = [SavedItem]()
     
+    
+    var roomPlanes = [SCNNode]()
+    var roomPlanesAnchor = [ARPlaneAnchor]()
+    var isPlaneAnchorPresent = false
+    var nodesToRemove = [SCNNode]()
+    let gifImage = UIImage.gifImageWithName("CircleGrid")
+    var gifImageView = UIImageView()
+    
+    var previousLoc: CGPoint?
+    var touchCount: Int?
+    
+    var PCoordx: Float = 0.0
+    var PCoordy: Float = 0.0
+    var PCoordz: Float = 0.0
+    
     // MARK: - Views
     
     private lazy var contentImageView: UIImageView = {
@@ -140,13 +152,13 @@ class MainViewController: UIViewController {
     var selectedArray = Array<String>()
     let titleLabel = UILabel()
     var lblBadge = UILabel()
-    let imageView = UIImageView(image: UIImage(named: "grid_pattern")!)
+    // let imageView = UIImageView(image: UIImage(named: "grid_pattern")!)
     // MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
+        gifImageView = UIImageView(image: gifImage)
+        configureLighting()
         hideNavigationBar()
         
         for i in 0...83
@@ -165,21 +177,7 @@ class MainViewController: UIViewController {
             self.chairsArray = chairsArray
         }
         
-        
         setupARCoachingView()
-        
-        // For carsh report
-        AppCenter.start(withAppSecret: "63cc7968-3c2a-4121-a36e-4ad1e7114762", services:[
-          Crashes.self
-        ])
-        
-        /*
-        let gif = try! UIImage(gifName: "Scanning.gif")
-        self.arCoachingView.setGifImage(gif, loopCount: -1) // Will loop forever
-        self.arCoachingView.setCornerRadius(radius: 8)
-        */
-        
-      //  moveYourPhoneLabel.isHidden = true
         cancelButton.isHidden = true
         checkMarkButton.isHidden = true
         arCoachingView.isHidden = true
@@ -189,7 +187,7 @@ class MainViewController: UIViewController {
         tapIconBackGroundOverlayImage.isHidden = true
         popupOffset = self.view.frame.height - 190
         addTapGestureToSceneView()
-        configureLighting()
+        
         
         self.fixedBottomView.isHidden = true
         self.tapToFindLocationTapView.isHidden = true
@@ -198,6 +196,7 @@ class MainViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpSceneView()
+        setupEasternMapleImageView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -207,7 +206,7 @@ class MainViewController: UIViewController {
         
         layout()
         setupCollectionView()
-        setupEasternMapleImageView()
+        
         setupTapToFindLocationTapView()
         topViewForPan.addGestureRecognizer(panRecognizer)
         self.view.bringSubviewToFront(self.fixedBottomView)
@@ -226,6 +225,29 @@ class MainViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             self.animateEasternMapleImageView()
         }
+        /*
+        if let fileUrl = Bundle.main.url(forResource: "NodeTechnique", withExtension: "plist"), let data = try? Data(contentsOf: fileUrl) {
+          if var result = try? PropertyListSerialization.propertyList(from: data, options: [], format: nil) as? [String: Any] { // [String: Any] which ever it is
+            
+            // Here we update the size and scale factor in the original technique file
+            // to whichever size and scale factor the current device is so that
+            // we avoid crazy aliasing
+            let nativePoints = UIScreen.main.bounds
+            let nativeScale = UIScreen.main.nativeScale
+            result[keyPath: "targets.MASK.size"] = "\(nativePoints.width)x\(nativePoints.height)"
+            result[keyPath: "targets.MASK.scaleFactor"] = nativeScale
+            
+            guard let technique = SCNTechnique(dictionary: result) else {
+              fatalError("This shouldn't be happening! 🤔")
+            }
+
+            sceneView.technique = technique
+          }
+        }
+        else {
+          fatalError("This shouldn't be happening! Has someone been naughty and deleted the file? 🤔")
+        }
+        */
     }
        
     override func viewWillDisappear(_ animated: Bool) {
@@ -423,6 +445,7 @@ class MainViewController: UIViewController {
                 self.fixedBottomView.isHidden = false
                 self.bottomViewHeightConstraint.constant = 80
                 self.heightConstraint.constant = self.view.frame.height - (self.view.safeAreaInsets.top + 102)
+                self.easternMapleImageView.fadeOut()
                 self.view.layoutIfNeeded()
                 self.setupButtonsImageandText()
             }, completion: nil)
@@ -503,23 +526,6 @@ class MainViewController: UIViewController {
         cartViewController.delegate = self
         cartViewController.modalPresentationStyle = .overFullScreen
         self.present(cartViewController, animated: true, completion: nil)
-        
-        /*
-        let realm = try! Realm()
-        savedItemList = Array(realm.objects(SavedItem.self))
-        tableView.reloadData()
-       if currentState == .open {
-         selectedTabIndex = 3
-         backButtonClicked()
-         moveBottomPopupToInitialHeight()
-       } else {
-         selectedTabIndex = 3
-         backButtonClicked()
-         openBottomPopUpIfNeeded()
-       }
-       tableView.isHidden = false
-       setupButtonsImageandText()
-       */
     }
     
     @IBAction func fifthButtonClicked(_ sender: Any) {
@@ -533,43 +539,6 @@ class MainViewController: UIViewController {
         wishlistViewController.delegate = self
         wishlistViewController.modalPresentationStyle = .overFullScreen
         self.present(wishlistViewController, animated: true, completion: nil)
-        
-        // This code is for wishlist In the bottom view itself
-        /*
-        let realm = try! Realm()
-        savedItemList = Array(realm.objects(SavedItem.self))
-        collectionView.reloadData()
-        tableView.isHidden = true
-        if currentState == .open {
-          selectedTabIndex = 4
-          backButtonClicked()
-          moveBottomPopupToInitialHeight()
-        } else {
-           selectedTabIndex = 4
-           
-           backButtonClicked()
-           openBottomPopUpIfNeeded()
-        }
-        setupButtonsImageandText()
-        */
-        
-        // This is Old Code
-        /*
-        let realm = try! Realm()
-        savedItemList = Array(realm.objects(SavedItem.self))
-        tableView.reloadData()
-       if currentState == .open {
-         selectedTabIndex = 4
-         backButtonClicked()
-         moveBottomPopupToInitialHeight()
-       } else {
-         selectedTabIndex = 4
-         backButtonClicked()
-         openBottomPopUpIfNeeded()
-       }
-       tableView.isHidden = false
-       setupButtonsImageandText()
-       */
     }
     
     @objc func imageTapped() {
@@ -580,7 +549,7 @@ class MainViewController: UIViewController {
         self.cancelButton.isHidden = true
         self.arCoachingView.isHidden = true
         self.arCoachingView.stopAnimating()
-      //  self.moveYourPhoneLabel.isHidden = true
+    
         self.mobielPlaneImageView.isHidden = true
         self.isAdded = true
         self.popupView.isHidden = false
@@ -590,9 +559,8 @@ class MainViewController: UIViewController {
     
     @IBAction func checkMarkButtonClicked(_ sender: Any) {
         checkMarkButton.isHidden = true
-       // self.tapIconLabel.isHidden = true
-       // self.tapIconBackGroundOverlayImage.isHidden = true
-        selectedNode?.setHighlighted(false, 1)
+      
+      //  selectedNode?.setHighlighted(false, 1)
         selectedNode?.runAction(SCNAction.moveBy(x: 0, y: -0.05, z: 0, duration: 0.5), completionHandler: nil)
         selectedNode = nil
         isSelected = false
@@ -637,7 +605,7 @@ class MainViewController: UIViewController {
                     print("Hidded")
                 } else {
                     if self.view.safeAreaInsets.top > 0 {
-                        self.bottomPopupOffset = 158
+                        self.bottomPopupOffset = 125
                     } else {
                         self.bottomPopupOffset = 0
                     }
@@ -656,7 +624,12 @@ class MainViewController: UIViewController {
                     self.bottomPopupOffset = 0
                     print("Hidded")
                 } else {
-                    self.bottomPopupOffset = 158
+                    if self.view.safeAreaInsets.top > 0 {
+                        self.bottomPopupOffset = 125
+                    } else {
+                        self.bottomPopupOffset = 0
+                    }
+                    
                     print("not Hidded")
                 }
                 self.bottomConstraint.constant = self.popupOffset
@@ -861,7 +834,7 @@ extension MainViewController: UICollectionViewDataSource, UICollectionViewDelega
         UIView.animate(withDuration: 0.75, delay: 0, options: .curveLinear, animations: {
             
             if self.view.safeAreaInsets.top > 0 {
-               self.bottomPopupOffset = 158
+               self.bottomPopupOffset = 125
             } else {
                self.bottomPopupOffset = 0
             }
@@ -902,6 +875,7 @@ extension MainViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(MainViewController.addShipToSceneView(withGestureRecognizer:)))
         sceneView.addGestureRecognizer(tapGestureRecognizer)
         
+       
         let panGestureRecognizerWithYAxis = PanDirectionGestureRecognizer(direction: .horizontal, target: self, action: #selector(MainViewController.rotateObjectWithYaxis(_:)))
         panGestureRecognizerWithYAxis.minimumNumberOfTouches = 2
         panGestureRecognizerWithYAxis.maximumNumberOfTouches = 2
@@ -910,27 +884,74 @@ extension MainViewController {
         let panGestureRecognizerWithXAxis = PanDirectionGestureRecognizer(direction: .horizontal, target: self, action: #selector(MainViewController.rotateObjectWithXaxis(_:)))
         panGestureRecognizerWithXAxis.minimumNumberOfTouches = 1
         panGestureRecognizerWithXAxis.maximumNumberOfTouches = 1
-       
         sceneView.addGestureRecognizer(panGestureRecognizerWithXAxis)
         
         let panGestureRecognizerWithZAxis = PanDirectionGestureRecognizer(direction: .vertical, target: self, action: #selector(MainViewController.rotateObjectWithZaxis(_:)))
         sceneView.addGestureRecognizer(panGestureRecognizerWithZAxis)
+        
     }
-    
+   
     func setUpSceneView() {
         let configuration = ARWorldTrackingConfiguration()
         configuration.planeDetection = .horizontal
-        configuration.isLightEstimationEnabled = true
         sceneView.session.run(configuration)
-        sceneView.delegate = self
     }
     
     func configureLighting() {
+        // Set the view's delegate
+        sceneView.delegate = self
         sceneView.autoenablesDefaultLighting = true
-        sceneView.automaticallyUpdatesLighting = true
+        let scene = SCNScene()
+        sceneView.scene = scene
     }
     
     @objc func addShipToSceneView(withGestureRecognizer recognizer: UIGestureRecognizer) {
+        if !isAdded {
+            if roomPlanes.count > 0 {
+            DispatchQueue.main.async {
+                self.cancelButton.isHidden = true
+                self.checkMarkButton.isHidden = false
+                self.addDeleteFurnitureView.isHidden = false
+                if let itemToView = self.itemToView {
+                self.addDeleteFurnitureView.configureView(savedItem: itemToView)
+                }
+            }
+            var nodeName = "M_223.dae"
+            var rootNodeName = "M_223"
+                
+            if let itemToView = self.itemToView, let nodeNameFromDB = itemToView.daeFileName, let rootNodeNameFromDB = itemToView.rootNode {
+                nodeName = nodeNameFromDB
+                rootNodeName = rootNodeNameFromDB
+            }
+            guard let shipScene = SCNScene(named: nodeName),
+            let shipNode = shipScene.rootNode.childNode(withName: rootNodeName, recursively: false)
+            else { return }
+            shipNode.name = rootNodeName
+            arPlaneAnchors[rootNodeName] = roomPlanesAnchor[0]
+            roomPlanes[0].name = rootNodeName
+            shipNode.worldPosition = roomPlanes[0].position//SCNVector3.positionFromTransform(roomPlanesAnchor[0].transform)
+            guard let frame = self.sceneView.session.currentFrame else {
+                return
+            }
+            currentAngleX = shipNode.worldPosition.x
+            currentAngleZ = shipNode.worldPosition.z
+            shipNode.eulerAngles.y = frame.camera.eulerAngles.y
+            currentAngleY = shipNode.eulerAngles.y
+            planeNodeArray.append(roomPlanes[0])
+            sceneView.debugOptions = []
+            selectedNode = shipNode
+            sceneView.scene.rootNode.addChildNode(shipNode)
+            selectedNode?.runAction(SCNAction.moveBy(x: 0, y: +0.05, z: 0, duration: 0), completionHandler: nil)
+            isAdded = true
+            isPlaneAnchorPresent = false
+            planeNodeArray.last?.isHidden = true
+            if roomPlanesAnchor.count > 0 {
+            self.sceneView.session.remove(anchor: self.roomPlanesAnchor[0])
+            }
+            roomPlanesAnchor.removeAll()
+            roomPlanes.removeAll()
+          }
+        } else {
         if selectedNode == nil && addDeleteFurnitureView.isHidden == false {
             self.addDeleteFurnitureView.isHidden = true
             self.popupView.isHidden = false
@@ -958,10 +979,11 @@ extension MainViewController {
             }
             currentAngleX = shipNode.worldPosition.x
             currentAngleZ = shipNode.worldPosition.z
+            currentAngleY = shipNode.eulerAngles.y
             shipNode.runAction(SCNAction.moveBy(x: 0, y: 0.05, z: 0, duration: 0.5), completionHandler: nil)
             selectedNode = shipNode
             
-            shipNode.setHighlighted()
+          //  shipNode.setHighlighted()
             isSelected = true
             self.checkMarkButton.isHidden = false
             self.addDeleteFurnitureView.isHidden = false
@@ -978,13 +1000,14 @@ extension MainViewController {
             self.showTopViewWithAnimationForPan()
             }
            }
+          }
         }
-
     }
 }
 
 extension MainViewController {
     func showTopViewWithAnimationForTap() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(showRotateFingerLabelOnTopView), object: nil)
         tapInfoLabel.text = "Tap once you find the right location"
         tapInfoImageView.isHidden = false
         tapInfoImageViewWidth.constant = 40
@@ -1003,6 +1026,7 @@ extension MainViewController {
     }
     
     func showTopViewWithAnimationForCoaching() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(showRotateFingerLabelOnTopView), object: nil)
         tapInfoLabel.text = "Move your iPhone left to right to start"
         tapInfoImageView.isHidden = true
         tapInfoImageViewWidth.constant = 0
@@ -1020,6 +1044,7 @@ extension MainViewController {
     }
     
     func showTopViewWithAnimationForPan() {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(showRotateFingerLabelOnTopView), object: nil)
         tapInfoLabel.text = "You can pan the product"
         tapInfoImageView.setImage(UIImage(named: "PanFinger"), for: .normal)
         tapInfoImageView.isHidden = false
@@ -1035,12 +1060,18 @@ extension MainViewController {
             self.view.layoutIfNeeded()
         }, completion: nil)
         }
+        perform(#selector(showRotateFingerLabelOnTopView), with: nil, afterDelay: 3.75)
     }
     
     
+    @objc func showRotateFingerLabelOnTopView() {
+        tapInfoLabel.text = "You can rotate the product"
+        tapInfoImageView.setImage(UIImage(named: "RotateFinger"), for: .normal)
+    }
+    
     
     func hideTopViewWithAnimation() {
-        
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(showRotateFingerLabelOnTopView), object: nil)
         UIView.animate(withDuration: 0.75, delay: 0, options: .curveLinear, animations: {
             if self.view.safeAreaInsets.top > 0 {
             self.tapToFindLocationTapViewBottom.constant = 44
@@ -1062,15 +1093,9 @@ extension MainViewController {
            let name = nodeToRotate.name
         
            let translation = gesture.translation(in: gesture.view!)
-           var newAngleX = (Float)(translation.x)*(Float)(Double.pi)/180.0
-           let limitAngle = newAngleX + currentAngleX
-           var lowerLimit: Float = -0.679
-           var higherLimit: Float = 0.679
-           if name == "M_177" || name == "_M_058" {
-            lowerLimit = lowerLimit * 0.70
-            higherLimit = higherLimit * 0.70
-           }
-          if limitAngle > lowerLimit && limitAngle < higherLimit {
+           
+           var newAngleX = ((Float)(translation.x)*(Float)(Double.pi)/180.0) * 0.06
+           print(newAngleX)
            newAngleX += currentAngleX
            nodeToRotate.worldPosition.x = newAngleX
            
@@ -1080,17 +1105,13 @@ extension MainViewController {
               }
             }
            if(gesture.state == .ended) { currentAngleX = newAngleX }
-          } else {
-            if(gesture.state == .ended) {gesture.setTranslation(.zero, in: gesture.view!)}
-          }
-           
     }
     
     @objc func rotateObjectWithYaxis(_ gesture: UIPanGestureRecognizer) {
         guard let nodeToRotate = selectedNode else { return }
 
         let translation = gesture.translation(in: gesture.view!)
-        var newAngleY = (Float)(translation.x)*(Float)(Double.pi)/180.0
+        var newAngleY = (Float)(translation.x)*(Float)(Double.pi)/180.0 * 0.06
         newAngleY += currentAngleY
         nodeToRotate.eulerAngles.y = newAngleY
         let name = nodeToRotate.name
@@ -1106,28 +1127,16 @@ extension MainViewController {
            guard let nodeToRotate = selectedNode else { return }
            let name = nodeToRotate.name
            let translation = gesture.translation(in: gesture.view!)
-           var newAngleZ = (Float)(translation.y)*(Float)(Double.pi)/180.0
-           let limitAngle = newAngleZ + currentAngleZ
-           var lowerLimit: Float = -1.2
-           var higherLimit: Float = 0.95
-           if name == "M_177" || name == "_M_058" {
-            lowerLimit = lowerLimit * 0.70
-            higherLimit = higherLimit * 0.70
-           }
-        
-           if limitAngle > lowerLimit && limitAngle < higherLimit {
+           var newAngleZ = (Float)(translation.y)*(Float)(Double.pi)/180.0 * 0.06
            newAngleZ += currentAngleZ
            nodeToRotate.worldPosition.z = newAngleZ
-           
+        
            for planeNode in planeNodeArray {
              if planeNode.name == name {
                planeNode.worldPosition.z = newAngleZ
              }
            }
            if(gesture.state == .ended) {currentAngleZ = newAngleZ}
-           } else {
-            if(gesture.state == .ended) {gesture.setTranslation(.zero, in: gesture.view!)}
-           }
     }
 }
 
@@ -1136,124 +1145,53 @@ extension MainViewController: ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         // 1
-        if !isAdded {
+        
+        if !isAdded && !isPlaneAnchorPresent {
+        isPlaneAnchorPresent = true
         DispatchQueue.main.async {
-            self.cancelButton.isHidden = true
-          
-            self.checkMarkButton.isHidden = false
-            self.addDeleteFurnitureView.isHidden = false
-            if let itemToView = self.itemToView {
-            self.addDeleteFurnitureView.configureView(savedItem: itemToView)
-            }
             self.arCoachingView.isHidden = true
-            self.arCoachingView.stopAnimating()
-       
             self.mobielPlaneImageView.isHidden = true
             self.showTopViewWithAnimationForTap()
         }
-        
-        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
-        
-        // 2
-        let width = CGFloat(planeAnchor.extent.x)
-        let height = CGFloat(planeAnchor.extent.z)
-        let plane = SCNPlane(width: width, height: height)
-        
-        // 3
-        if let itemToView = self.itemToView, let nodeNameFromDB = itemToView.daeFileName {
-             if nodeNameFromDB == "M_177.dae" || nodeNameFromDB == "M_058.dae" {
-               let image = UIImage(named: "grid_pattern_circular")
-               plane.materials.first?.diffuse.contents = image
-             } else {
-               let image = UIImage(named: "grid_pattern")
-               plane.materials.first?.diffuse.contents = image
-             }
+        if roomPlanesAnchor.count > 0 {
+            self.sceneView.session.remove(anchor: self.roomPlanesAnchor[0])
         }
+        roomPlanesAnchor.removeAll()
+        roomPlanes.removeAll()
+        guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+        roomPlanesAnchor.append(planeAnchor)
+        let plane = SCNPlane(width: 0.3, height: 0.3)
+        let image = UIImage(named: "grid_pattern_circular")
+        plane.firstMaterial?.diffuse.contents = image
         
-        // 4
         let planeNode = SCNNode(geometry: plane)
-        
-        // 5
         let x = CGFloat(planeAnchor.center.x)
-       
         let z = CGFloat(planeAnchor.center.z)
         planeNode.position = SCNVector3(x,-0.002,z)
         planeNode.eulerAngles.x = -.pi / 2
-        
-        var nodeName = "M_223.dae"
-        var rootNodeName = "M_223"
-            
-        if let itemToView = self.itemToView, let nodeNameFromDB = itemToView.daeFileName, let rootNodeNameFromDB = itemToView.rootNode {
-            nodeName = nodeNameFromDB
-            rootNodeName = rootNodeNameFromDB
-        }
-        guard let shipScene = SCNScene(named: nodeName),
-        let shipNode = shipScene.rootNode.childNode(withName: rootNodeName, recursively: false)
-        else { return }
-        shipNode.name = rootNodeName
-        arPlaneAnchors[rootNodeName] = planeAnchor
-        planeNode.name = rootNodeName
-        shipNode.worldPosition = SCNVector3.positionFromTransform(planeAnchor.transform)
         planeNode.worldPosition = SCNVector3.positionFromTransform(planeAnchor.transform)
         guard let frame = self.sceneView.session.currentFrame else {
             return
         }
-        currentAngleX = shipNode.worldPosition.x
-        currentAngleZ = shipNode.worldPosition.z
-        shipNode.eulerAngles.y = frame.camera.eulerAngles.y
         planeNode.eulerAngles.y = frame.camera.eulerAngles.y
-            
-            
-        
-        if let path = Bundle.main.path(forResource: "NodeTechnique", ofType: "plist") {
-            if let dict = NSDictionary(contentsOfFile: path)  {
-                let dict2 = dict as! [String : AnyObject]
-                let technique = SCNTechnique(dictionary:dict2)
-
-                // set the glow color to yellow
-                let color = SCNVector3(1.0, 1.0, 1.0)
-                technique?.setValue(NSValue(scnVector3: color), forKeyPath: "glowColorSymbol")
-
-                self.sceneView.technique = technique
-            }
-        }
-        
-        selectedNode = shipNode
         sceneView.scene.rootNode.addChildNode(planeNode)
-        sceneView.scene.rootNode.addChildNode(shipNode)
-        selectedNode?.runAction(SCNAction.moveBy(x: 0, y: +0.05, z: 0, duration: 0), completionHandler: nil)
-            
-        let textContainerSize = shipNode.boundingBox
-        let xSize = textContainerSize.max.x - textContainerSize.min.x
-        let ySize = textContainerSize.max.y - textContainerSize.min.y
-            
-        if let itemToView = self.itemToView, let nodeNameFromDB = itemToView.daeFileName {
-            if nodeNameFromDB == "M_177.dae" || nodeNameFromDB == "M_058.dae" {
-            plane.width = CGFloat(ySize/100)
-            plane.height = CGFloat(ySize/100)
-            } else {
-            plane.width = CGFloat(xSize/100)
-            plane.height = CGFloat(ySize/100)
+        roomPlanes.append(planeNode)
+        } else {
+            print("DID Add Node")
+            guard let planeAnchor = anchor as? ARPlaneAnchor else { return }
+            let plane = SCNPlane(width: 0, height: 0)
+            let planeNode = SCNNode(geometry: plane)
+            planeNode.name = "NodesToremove\(nodesToRemove.count)"
+            print("DID Add Use Less Node")
+            node.addChildNode(planeNode)
+            if let planeAnchor = sceneView.anchor(for: planeNode) as? ARPlaneAnchor {
+                sceneView.session.remove(anchor: planeAnchor)
             }
-        }
-
-        planeArray.append(plane)
-        planeNodeArray.append(planeNode)
-        
-        sceneView.debugOptions = []
-        isAdded = true
+            planeNode.removeFromParentNode()
         }
     }
     
-    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {
-    }
-    
-    func sessionWasInterrupted(_ session: ARSession) {
-        let configuration = ARWorldTrackingConfiguration()
-        configuration.planeDetection = .horizontal
-        self.sceneView.session.run(configuration, options: [ARSession.RunOptions.removeExistingAnchors, ARSession.RunOptions.resetTracking])
-        sceneView.delegate = self
-    }
+    func renderer(_ renderer: SCNSceneRenderer, didUpdate node: SCNNode, for anchor: ARAnchor) {}
 }
 
 extension MainViewController: FurnitureDetailViewDelegate {
@@ -1297,8 +1235,21 @@ extension MainViewController: FurnitureDetailViewDelegate {
         arCoachingView.startAnimating()
         mobielPlaneImageView.isHidden = false
       //  moveYourPhoneLabel.isHidden = false
-        isAdded = false
+        removeAllUseLessAnchor()
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
+        if roomPlanesAnchor.count > 0 {
+        self.sceneView.session.remove(anchor: self.roomPlanesAnchor[0])
+        }
+        roomPlanesAnchor.removeAll()
+        roomPlanes.removeAll()
+        isAdded = false
+        if roomPlanesAnchor.count > 0 {
+        self.sceneView.session.remove(anchor: self.roomPlanesAnchor[0])
+        }
+        roomPlanesAnchor.removeAll()
+        roomPlanes.removeAll()
+        isPlaneAnchorPresent = false
+        removeAllUseLessAnchor()
         animateTransitionIfNeeded(to: currentState.opposite, duration: 1)
         showTopViewWithAnimationForCoaching()
         
@@ -1334,6 +1285,7 @@ extension MainViewController: AddDeleteFurnitureViewDelegate {
     }
     
     func deleteButtonClicked() {
+        
         for index in 0...itemToViewArray.count - 1 {
             if itemToViewArray[index] == itemToView {
                 itemToViewArray.remove(at: index)
@@ -1361,17 +1313,16 @@ extension MainViewController: AddDeleteFurnitureViewDelegate {
         selectedNode = nil
         
         checkMarkButton.isHidden = true
-       // self.tapIconLabel.isHidden = true
-       // self.tapIconBackGroundOverlayImage.isHidden = true
         self.addDeleteFurnitureView.isHidden = true
         self.hideTopViewWithAnimation()
         self.popupView.isHidden = false
         self.fixedBottomView.isHidden = false
+        self.isSelected = false
     }
     
     func shutterButtonClicked() {
         checkMarkButton.isHidden = true
-        selectedNode?.setHighlighted(false, 1)
+      //  selectedNode?.setHighlighted(false, 1)
         selectedNode?.runAction(SCNAction.moveBy(x: 0, y: -0.05, z: 0, duration: 0.5), completionHandler: nil)
         selectedNode = nil
         isSelected = false
@@ -1442,10 +1393,25 @@ extension MainViewController: WishListCollectionViewCellDelegate {
         arCoachingView.isHidden = false
         arCoachingView.startAnimating()
         mobielPlaneImageView.isHidden = false
+        removeAllUseLessAnchor()
         isAdded = false
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         animateTransitionIfNeeded(to: currentState.opposite, duration: 1)
         showTopViewWithAnimationForCoaching()
+    }
+    
+    func removeAllUseLessAnchor() {
+        if nodesToRemove.count > 0 {
+           for index in 0...nodesToRemove.count - 1 {
+            if ( nodesToRemove[index].name == "NodesToremove\(index)") {
+                      if let planeAnchor = sceneView.anchor(for: nodesToRemove[index]) as? ARPlaneAnchor {
+                          sceneView.session.remove(anchor: planeAnchor)
+                      }
+                nodesToRemove[index].removeFromParentNode()
+                  }
+           }
+        }
+        nodesToRemove.removeAll()
     }
 }
 
@@ -1577,5 +1543,84 @@ extension MainViewController {
         lblBadge.isHidden = true
         lblBadge.removeFromSuperview()
         }
+    }
+}
+
+extension MainViewController {
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        if !isAdded {
+        if roomPlanes.count > 0 {
+            DispatchQueue.main.async {
+                let center = self.view.center
+                guard let realWorldPosition = self.sceneView.realWorldPosition(for: center) else { return }
+                if self.roomPlanes.count > 0 {
+                self.roomPlanes[0].position = realWorldPosition
+                }
+            }
+        }
+        }
+        if !isAdded {
+          guard let pointOfView = renderer.pointOfView else {return}
+
+          if roomPlanes.count > 0 {
+          let node = roomPlanes[0]
+          let isVisible = renderer.isNode(node, insideFrustumOf: pointOfView)
+            
+          if isVisible {
+            DispatchQueue.main.async {
+                self.sceneView.debugOptions = []
+                self.arCoachingView.isHidden = true
+                self.mobielPlaneImageView.isHidden = true
+                self.showTopViewWithAnimationForTap()
+                print("isPlaneAnchorPresent")
+                self.isPlaneAnchorPresent = true
+            }
+            
+          } else {
+            DispatchQueue.main.async {
+            self.sceneView.session.remove(anchor: self.roomPlanesAnchor[0])
+            node.removeFromParentNode()
+            self.roomPlanes.removeAll()
+            self.roomPlanesAnchor.removeAll()
+            self.sceneView.debugOptions = [.showFeaturePoints]
+            self.arCoachingView.isHidden = false
+            self.mobielPlaneImageView.isHidden = false
+            self.showTopViewWithAnimationForCoaching()
+            self.isPlaneAnchorPresent = false
+            }
+          }
+         }
+        }
+    }
+}
+
+extension MainViewController {
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        print("error")
+        // Present an error message to the user
+    }
+    
+    func sessionWasInterrupted(_ session: ARSession) {
+        print("sessionWasInterrupted")
+        // Inform the user that the session has been interrupted, for example, by presenting an overlay
+    }
+    
+    func sessionInterruptionEnded(_ session: ARSession) {
+        // Reset tracking and/or remove existing anchors if consistent tracking is required
+        print("sessionInterruptionEnded")
+    }
+}
+
+
+extension ARSCNView {
+    // create real world position of the point
+    func realWorldPosition(for point: CGPoint) -> SCNVector3? {
+        let result = self.hitTest(point, types: [.existingPlaneUsingGeometry])
+        guard let hitResult = result.last else { return nil }
+        let hitTransform = SCNMatrix4(hitResult.worldTransform)
+        // m4x -> position ;; 1: x, 2: y, 3: z
+        let hitVector = SCNVector3Make(hitTransform.m41, hitTransform.m42, hitTransform.m43)
+
+        return hitVector
     }
 }

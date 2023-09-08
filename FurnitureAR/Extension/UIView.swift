@@ -293,3 +293,20 @@ func hideWithAnimation(hidden: Bool) {
         })
     }
 }
+
+extension UIView {
+func fadeIn(withDuration duration: TimeInterval = 1.0) {
+    UIView.animate(withDuration: duration, animations: {
+        self.alpha = 1.0
+    })
+}
+
+/// Fade out a view with a duration
+///
+/// - Parameter duration: custom animation duration
+    func fadeOut(withDuration duration: TimeInterval = 0.75) {
+    UIView.animate(withDuration: duration, animations: {
+        self.alpha = 0.0
+    })
+}
+}
