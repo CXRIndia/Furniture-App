@@ -41,4 +41,8 @@ extension UIColor {
     open class var blackButtonColor: UIColor {
         return UIColor(red: 33/255, green: 33/255, blue: 33/255, alpha: 1)
     }
+    
+    open class var grayButtonColor: UIColor {
+        return UIColor(red: 144/255, green: 144/255, blue: 144/255, alpha: 1)
+    }
 }

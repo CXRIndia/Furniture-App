@@ -96,8 +96,8 @@ class WishListCollectionViewCell: UICollectionViewCell {
               deleteButton.topAnchor.constraint(
                 equalTo: self.cardShadowView.topAnchor, constant: 12
               ),
-              deleteButton.heightAnchor.constraint(equalToConstant: 12),
-              deleteButton.widthAnchor.constraint(equalToConstant: 12)
+              deleteButton.heightAnchor.constraint(equalToConstant: 20),
+              deleteButton.widthAnchor.constraint(equalToConstant: 20)
            ])
         deleteButton.setImage(UIImage(named: "Cancel"), for: .normal)
         deleteButton.backgroundColor = .clear
@@ -112,21 +112,17 @@ class WishListCollectionViewCell: UICollectionViewCell {
             [
            
             titleImageView.topAnchor.constraint(
-                equalTo: deleteButton.centerYAnchor,
+                equalTo: cardShadowView.topAnchor,
+                constant: 10
+            ),
+            titleImageView.centerXAnchor.constraint(
+                equalTo: cardShadowView.centerXAnchor,
                 constant: 0
             ),
-            titleImageView.trailingAnchor.constraint(
-                equalTo: cardShadowView.trailingAnchor,
-                constant: -4
-            ),
-            titleImageView.leadingAnchor.constraint(
-                equalTo: cardShadowView.leadingAnchor,
-                constant: 4
-            ),
-            titleImageView.heightAnchor.constraint(equalToConstant: 72)
+            titleImageView.heightAnchor.constraint(equalToConstant: 100)
          ]
         )
-        titleImageView.image = UIImage(named: "Dining Room Chair")
+        titleImageView.image = UIImage(named: "Modern Floating Arm Back chair")
         titleImageView.contentMode = .scaleAspectFit
     }
     
@@ -137,7 +133,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
         NSLayoutConstraint.activate([
             borderView.leadingAnchor.constraint(equalTo: cardShadowView.leadingAnchor, constant: 12),
             borderView.trailingAnchor.constraint(equalTo: cardShadowView.trailingAnchor, constant: -12),
-            borderView.topAnchor.constraint(equalTo: titleImageView.bottomAnchor, constant: 16),
+            borderView.topAnchor.constraint(equalTo: titleImageView.bottomAnchor, constant: 2),
             borderView.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
@@ -145,7 +141,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
     func setupFurnitureTitleLabel() {
         cardShadowView.addSubview(furnitureTitleLabel)
         furnitureTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        furnitureTitleLabel.text = "Crystal Chair"
+        furnitureTitleLabel.text = "Organic Egg-Shaped"
         NSLayoutConstraint.activate([
             
             furnitureTitleLabel.leadingAnchor.constraint(equalTo: borderView.leadingAnchor, constant: 0),
@@ -170,7 +166,7 @@ class WishListCollectionViewCell: UICollectionViewCell {
             furniturePriceLabel.leadingAnchor.constraint(equalTo: borderView.leadingAnchor, constant: 0),
             furniturePriceLabel.topAnchor.constraint(equalTo: furnitureTitleLabel.bottomAnchor, constant: 2),
             furniturePriceLabel.trailingAnchor.constraint(equalTo: borderView.trailingAnchor, constant: 0),
-            furniturePriceLabel.bottomAnchor.constraint(equalTo: cardShadowView.bottomAnchor, constant: -12),
+           // furniturePriceLabel.bottomAnchor.constraint(equalTo: cardShadowView.bottomAnchor, constant: -12),
             
         ])
         furniturePriceLabel.textAlignment = .left

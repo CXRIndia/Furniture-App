@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 import RealmSwift
-import AppCenter
-import AppCenterCrashes
+
 
 class CartViewController: UIViewController {
 
@@ -35,12 +34,6 @@ class CartViewController: UIViewController {
     var lblBadge = UILabel()
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // For carsh report
-        AppCenter.start(withAppSecret: "63cc7968-3c2a-4121-a36e-4ad1e7114762", services:[
-          Crashes.self
-        ])
-                            
         setupUI()
     }
     
@@ -85,7 +78,7 @@ class CartViewController: UIViewController {
         self.delegate?.diddismissVC(index: 4)
     }
     @IBAction func checkOutButtonClicked(_ sender: Any) {
-        if let url = URL(string: "https://cemtrexlabs.com/") {
+        if let url = URL(string: "https://cemtrexlabs.com/contact") {
             UIApplication.shared.open(url)
         }
     }
@@ -275,6 +268,7 @@ extension CartViewController:RemovefromCartVCDelegate {
             emptyDataView.isHidden = false
         }
         setBadge()
+        setupItemPrice()
     }
 }
 
